@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DD56157-4924-4E09-8958-28AAD90A0CE9}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Skahal.Buildron.BackEnd.Web</RootNamespace>
+    <AssemblyName>Skahal.Buildron.BackEnd.Web</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Skahal.Web">
+      <HintPath>..\References\Skahal.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Vici.Core">
+      <HintPath>..\References\Vici.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleAnalyticsTracker">
+      <HintPath>..\References\GoogleAnalyticsTracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True">
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Services\Clients\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Services\Servers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\ServiceMethodBase.cs" />
+    <Compile Include="Services\ServiceMethodContext.cs" />
+    <Compile Include="Helpers\ClientHelper.cs" />
+    <Compile Include="Services\Clients\RegisterClient.ashx.cs">
+      <DependentUpon>RegisterClient.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Clients\CheckUpdates.ashx.cs">
+      <DependentUpon>CheckUpdates.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Servers\ResetServer.ashx.cs">
+      <DependentUpon>ResetServer.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Clients\CheckNotifications.ashx.cs">
+      <DependentUpon>CheckNotifications.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Skahal.Buildron.BackEnd.Domain\Skahal.Buildron.BackEnd.Domain.csproj">
+      <Project>{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}</Project>
+      <Name>Skahal.Buildron.BackEnd.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Skahal.Buildron.BackEnd.Infrastructure\Skahal.Buildron.BackEnd.Infrastructure.csproj">
+      <Project>{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}</Project>
+      <Name>Skahal.Buildron.BackEnd.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Services\Clients\RegisterClient.ashx" />
+    <Content Include="Services\Clients\CheckUpdates.ashx" />
+    <Content Include="Global.asax" />
+    <Content Include="Pages\Dashboard.aspx" />
+    <Content Include="web.config" />
+    <Content Include="Services\Servers\ResetServer.ashx" />
+    <Content Include="Services\Clients\CheckNotifications.ashx" />
+  </ItemGroup>
+</Project>

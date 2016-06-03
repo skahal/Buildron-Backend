@@ -234,3 +234,4 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+src/Skahal.Buildron.BackEnd.Domain.UnitTests/test-results

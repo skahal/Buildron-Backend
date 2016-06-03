@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skahal.Buildron.BackEnd.Web", "Skahal.Buildron.BackEnd.Web\Skahal.Buildron.BackEnd.Web.csproj", "{4DD56157-4924-4E09-8958-28AAD90A0CE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skahal.Buildron.BackEnd.Domain", "Skahal.Buildron.BackEnd.Domain\Skahal.Buildron.BackEnd.Domain.csproj", "{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skahal.Buildron.BackEnd.Domain.UnitTests", "Skahal.Buildron.BackEnd.Domain.UnitTests\Skahal.Buildron.BackEnd.Domain.UnitTests.csproj", "{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skahal.Buildron.BackEnd.Infrastructure", "Skahal.Buildron.BackEnd.Infrastructure\Skahal.Buildron.BackEnd.Infrastructure.csproj", "{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DD56157-4924-4E09-8958-28AAD90A0CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD56157-4924-4E09-8958-28AAD90A0CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD56157-4924-4E09-8958-28AAD90A0CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD56157-4924-4E09-8958-28AAD90A0CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58ADA78-9752-4CAE-9D5F-DC0FC129EBCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Skahal.Buildron.BackEnd.Web\Skahal.Buildron.BackEnd.Web.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABB7F0DD-91A9-46E8-9D2C-727F0346EC92}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Skahal.Buildron.BackEnd.Domain.UnitTests</RootNamespace>
+    <AssemblyName>Skahal.Buildron.BackEnd.Domain.UnitTests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\References\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\References\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\References\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Skahal.Buildron.BackEnd.Domain\Skahal.Buildron.BackEnd.Domain.csproj">
+      <Project>{59E46D24-CDB2-47A6-8B4C-CBBFC1736A2B}</Project>
+      <Name>Skahal.Buildron.BackEnd.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Clients\" />
+    <Folder Include="Messaging\" />
+    <Folder Include="Servers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clients\ClientTest.cs" />
+    <Compile Include="Clients\ClientServiceTest.cs" />
+    <Compile Include="Messaging\MessageTest.cs" />
+    <Compile Include="Servers\ServerServiceTest.cs" />
+    <Compile Include="Servers\ServerStatisticsTest.cs" />
+  </ItemGroup>
+</Project>
