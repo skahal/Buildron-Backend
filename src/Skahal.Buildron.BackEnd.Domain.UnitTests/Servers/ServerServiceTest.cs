@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Skahal.Buildron.BackEnd.Domain.Servers;
 using Rhino.Mocks;
 using Skahal.Buildron.BackEnd.Domain.Clients;
+using Skahal.Buildron.BackEnd.Domain.Messaging;
 
 namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 {
@@ -14,7 +15,11 @@ namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 		[SetUp]
 		public void InitializeTest()
 		{
-			ServerService.Initialize(MockRepository.GenerateMock<IServerRepository>());
+			var notificationRepository = MockRepository.GenerateMock<INotificationMessageRepository> ();
+			notificationRepository.Expect (e => e.FindAll ()).Return (new NotificationMessage[] { new NotificationMessage ("a", "b") });
+			ServerService.Initialize(
+				MockRepository.GenerateMock<IServerRepository>(),
+				notificationRepository);
 		}
 
 		#region Reset

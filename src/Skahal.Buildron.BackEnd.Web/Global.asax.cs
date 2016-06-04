@@ -16,7 +16,7 @@ namespace Skahal.Buildron.BackEnd.Web
 		
 		protected virtual void Application_Start (Object sender, EventArgs e)
 		{
-			ServerService.Initialize(new MySqlServerRepository());
+			ServerService.Initialize(new MySqlServerRepository(), new MemoryNotificationMessageRepository());
 		}
 		
 		protected virtual void Session_Start (Object sender, EventArgs e)

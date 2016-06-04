@@ -4,6 +4,7 @@ using System;
 using Skahal.Buildron.BackEnd.Domain.Clients;
 using System.Threading;
 using Skahal.Buildron.BackEnd.Domain.Messaging;
+using System.Linq;
 
 namespace Skahal.Buildron.BackEnd.Domain.Servers
 {
@@ -11,16 +12,18 @@ namespace Skahal.Buildron.BackEnd.Domain.Servers
 	{
 		#region Fields
 		private static object s_lock = new object();
-		private static IServerRepository s_repository;
+		private static IServerRepository s_serverRepository;
+		private static INotificationMessageRepository s_notificationMessageRepository;
 		private static ServerStatistics s_statistics;
 		private static Random s_random;
 		#endregion
 
 		#region Methods
-		public static void Initialize(IServerRepository repository)
+		public static void Initialize(IServerRepository repository, INotificationMessageRepository notificationMessageRepository)
 		{
-			s_repository = repository;
-			s_statistics = s_repository.FindStatistics();
+			s_serverRepository = repository;
+			s_notificationMessageRepository = notificationMessageRepository;
+			s_statistics = s_serverRepository.FindStatistics();
 			
 			if(s_statistics == null)
 			{
@@ -35,7 +38,7 @@ namespace Skahal.Buildron.BackEnd.Domain.Servers
 					try
 					{
 						Thread.Sleep(30000);
-						s_repository.SaveStatistics(s_statistics);
+						s_serverRepository.SaveStatistics(s_statistics);
 					}
 					catch
 					{
@@ -112,40 +115,30 @@ namespace Skahal.Buildron.BackEnd.Domain.Servers
 			}
 		}
 
-		public static Message CheckUpdates(Client client)
+		public static UpdateMessage CheckUpdates(Client client)
 		{
-			var message = new Message("CHECK_UPDATES");
+			UpdateMessage message;
 			var currentVersion = ClientService.GetCurrentVersion(client);
 
 			if(currentVersion.Equals(client.Version))
 			{
-				message.Values.Add("UPDATE_TEXT", "Your version is up to date");
+				message = new UpdateMessage("Your version is up to date", null);
 			}
 			else
 			{
-				message.Values.Add("UPDATE_TEXT", String.Format("New version is {0}. Download it from http://skahal.com/buildron", currentVersion));
-				message.Values.Add("UPDATE_LINK", "http://skahal.com/buildron");
+				message = new UpdateMessage(
+					String.Format("New version is {0}. Download it from https://github.com/skahal/Buildron", currentVersion),
+					"https://github.com/skahal/Buildron");
 			}
 
 			return message;
 		}
 
-		public static Message CheckNotifications(Client client)
+		public static NotificationMessage CheckNotifications(Client client)
 		{
-			Message message;
+			var notifications = s_notificationMessageRepository.FindAll ().ToArray ();
 
-			if(s_random.NextDouble() <= 0.5)
-			{
-				message = new Message("DOWNLOAD_RC");
-				message.Values.Add("NOTIFICATION_TEXT", "Download Buildron RC for iOS and Android: \nhttp://skahal.com/buildron-rc");
-			}
-			else
-			{
-				message = new Message("TAKE_PHOTO");
-				message.Values.Add("NOTIFICATION_TEXT", "Take a photo from your Buildron and share it on our gallery at\nhttp://skahal.com/buildron");
-			}
-
-			return message;
+			return notifications[s_random.Next(0, notifications.Length)];
 		}
 
 		public static ServerStatistics GetStatistics()
