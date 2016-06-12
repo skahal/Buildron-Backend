@@ -4,37 +4,39 @@ using System;
 
 namespace Skahal.Buildron.BackEnd.Domain.Clients
 {
+	/// <summary>
+	/// Domain service that provides information about Buildron clients.
+	/// </summary>
 	public static class ClientService
 	{
-		#region Constants
-		public const string CurrentBuildronMacVersion = "1.6.0";
-		public const string CurrentBuildronWinVersion = "1.6.0";
-		public const string CurrentRemoteControlVersion = "2.1.0";
+		#region Fields
+		private static IClientInfoProvider s_clientInfoProvider;
 		#endregion
 
-		public static string GetCurrentVersion (Client client)
+		#region Methods
+		/// <summary>
+		/// Initialize the service.
+		/// </summary>
+		/// <param name="clientInfoProvider">Client info provider.</param>
+		public static void Initialize (IClientInfoProvider clientInfoProvider)
+		{
+			s_clientInfoProvider = clientInfoProvider;
+		}
+
+		/// <summary>
+		/// Gets the latest client version.
+		/// </summary>
+		/// <returns>The latest version.</returns>
+		/// <param name="client">Client.</param>
+		public static string GetLatestVersion (Client client)
 		{
 			if(client == null)
 			{
 				throw new ArgumentNullException("client");
 			}
 		
-			switch(client.Kind)
-			{
-			case ClientKind.Buildron:
-				if(client.Device == ClientDevice.Mac)
-				{
-					return CurrentBuildronMacVersion;
-				}
-				else
-				{
-					return CurrentBuildronWinVersion;
-				}
-
-			default:
-				return CurrentRemoteControlVersion;
-			}
+			return s_clientInfoProvider.FindLatestVersion (client.Device, client.Kind);
 		}
+		#endregion
 	}
 }
-

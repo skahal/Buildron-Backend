@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.SessionState;
 using Skahal.Buildron.BackEnd.Domain.Servers;
 using Skahal.Buildron.BackEnd.Infrastructure.Repositories;
+using Skahal.Buildron.BackEnd.Domain.Clients;
+using Skahal.Buildron.BackEnd.Infrastructure;
+using Skahal.Buildron.BackEnd.Infrastructure.Providers;
 
 namespace Skahal.Buildron.BackEnd.Web
 {
@@ -16,7 +19,12 @@ namespace Skahal.Buildron.BackEnd.Web
 		
 		protected virtual void Application_Start (Object sender, EventArgs e)
 		{
-			ServerService.Initialize(new MySqlServerRepository(), new MemoryNotificationMessageRepository());
+			ServerService.Initialize(
+				new MySqlServerRepository(), 
+				new MemoryNotificationMessageRepository());
+			
+			ClientService.Initialize (
+				new CacheClientInfoProvider(new GitHubClientInfoProvider (), TimeSpan.FromHours(1)));
 		}
 		
 		protected virtual void Session_Start (Object sender, EventArgs e)

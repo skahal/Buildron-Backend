@@ -37,11 +37,15 @@
       <HintPath>..\References\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Repositories\MySqlServerRepository.cs" />
     <Compile Include="Repositories\MemoryNotificationMessageRepository.cs" />
+    <Compile Include="Providers\CacheClientInfoProvider.cs" />
+    <Compile Include="Providers\GitHubClientInfoProvider.cs" />
+    <Compile Include="Providers\StaticClientInfoProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

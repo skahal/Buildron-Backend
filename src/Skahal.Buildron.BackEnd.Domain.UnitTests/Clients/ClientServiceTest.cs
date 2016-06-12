@@ -3,6 +3,7 @@
 using System;
 using NUnit.Framework;
 using Skahal.Buildron.BackEnd.Domain.Clients;
+using Rhino.Mocks;
 
 namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 {
@@ -13,34 +14,46 @@ namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void GetCurrentVersion_ClientIsNull_ArgumentNullException ()
 		{
-			ClientService.GetCurrentVersion(null);
+			ClientService.GetLatestVersion(null);
 		}
 
 		[Test()]
 		public void GetCurrentVersion_KindIsBuildronDeviceMac_VersionEqualCurrentBuildronVersion ()
 		{
-			var client = new Client("ID") { Kind = ClientKind.Buildron, Device = ClientDevice.Mac };
-			var actual = ClientService.GetCurrentVersion(client);
+			var provider = MockRepository.GenerateMock<IClientInfoProvider> ();
+			provider.Expect (p => p.FindLatestVersion (ClientDevice.Mac, ClientKind.Buildron)).Return ("1");
+			ClientService.Initialize (provider);
 
-			Assert.AreEqual(ClientService.CurrentBuildronMacVersion, actual);
+			var client = new Client("ID") { Kind = ClientKind.Buildron, Device = ClientDevice.Mac };
+			var actual = ClientService.GetLatestVersion(client);
+
+			Assert.AreEqual("1", actual);
 		}
 
 		[Test()]
 		public void GetCurrentVersion_KindIsBuildronDeviceWin_VersionEqualCurrentBuildronVersion ()
 		{
-			var client = new Client("ID") { Kind = ClientKind.Buildron, Device = ClientDevice.Windows };
-			var actual = ClientService.GetCurrentVersion(client);
+			var provider = MockRepository.GenerateMock<IClientInfoProvider> ();
+			provider.Expect (p => p.FindLatestVersion (ClientDevice.Mac, ClientKind.Buildron)).Return ("2");
+			ClientService.Initialize (provider);
+
+			var client = new Client("ID") { Kind = ClientKind.Buildron, Device = ClientDevice.Mac };
+			var actual = ClientService.GetLatestVersion(client);
 			
-			Assert.AreEqual(ClientService.CurrentBuildronWinVersion, actual);
+			Assert.AreEqual("2", actual);
 		}
 
 		[Test()]
 		public void GetCurrentVersion_KindIsRemoteControl_VersionEqualCurrentBuildronVersion ()
 		{
-			var client = new Client("ID") { Kind = ClientKind.RemoteControl };
-			var actual = ClientService.GetCurrentVersion(client);
+			var provider = MockRepository.GenerateMock<IClientInfoProvider> ();
+			provider.Expect (p => p.FindLatestVersion (ClientDevice.iPad, ClientKind.RemoteControl)).Return ("3");
+			ClientService.Initialize (provider);
 
-			Assert.AreEqual(ClientService.CurrentRemoteControlVersion, actual);
+			var client = new Client("ID") { Kind = ClientKind.RemoteControl, Device = ClientDevice.iPad };
+			var actual = ClientService.GetLatestVersion(client);
+
+			Assert.AreEqual("3", actual);
 		}
 	}
 }

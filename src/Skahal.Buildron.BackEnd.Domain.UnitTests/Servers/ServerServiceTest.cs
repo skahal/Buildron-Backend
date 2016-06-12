@@ -166,6 +166,10 @@ namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 		[Test()]
 		public void CheckUpdates_ClientVersionsIsOutOfDate_OutOfDateMessage()
 		{
+			var provider = MockRepository.GenerateMock<IClientInfoProvider> ();
+			provider.Expect (p => p.FindLatestVersion (ClientDevice.iPad, ClientKind.RemoteControl)).IgnoreArguments().Return ("3");
+			ClientService.Initialize (provider);
+
 			var client = new Client("ID");
 			client.Version = "0.0.0";
 
@@ -177,10 +181,14 @@ namespace Skahal.Buildron.BackEnd.Domain.UnitTests
 		[Test()]
 		public void CheckUpdates_ClientVersionsIsUpdated_UpdatedMessage()
 		{
+			var provider = MockRepository.GenerateMock<IClientInfoProvider> ();
+			provider.Expect (p => p.FindLatestVersion (ClientDevice.Mac, ClientKind.Buildron)).Return ("1");
+			ClientService.Initialize (provider);
+
 			var client = new Client("ID");
 			client.Kind = ClientKind.Buildron;
 			client.Device = ClientDevice.Mac;
-			client.Version = ClientService.CurrentBuildronMacVersion;
+			client.Version = "1";
 
 			var actual = ServerService.CheckUpdates(client);
 			Assert.AreEqual("CHECK_UPDATES", actual.Name);

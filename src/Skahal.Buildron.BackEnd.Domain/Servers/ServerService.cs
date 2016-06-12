@@ -118,7 +118,7 @@ namespace Skahal.Buildron.BackEnd.Domain.Servers
 		public static UpdateMessage CheckUpdates(Client client)
 		{
 			UpdateMessage message;
-			var currentVersion = ClientService.GetCurrentVersion(client);
+			var currentVersion = ClientService.GetLatestVersion(client);
 
 			if(currentVersion.Equals(client.Version))
 			{

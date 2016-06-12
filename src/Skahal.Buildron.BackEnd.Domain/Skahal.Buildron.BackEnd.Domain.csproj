@@ -42,6 +42,7 @@
     <Compile Include="Messaging\NotificationMessage.cs" />
     <Compile Include="Messaging\UpdateMessage.cs" />
     <Compile Include="Messaging\INotificationMessageRepository.cs" />
+    <Compile Include="Clients\IClientInfoProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
