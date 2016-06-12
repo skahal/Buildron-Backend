@@ -30,7 +30,3 @@ Did you change it? [Submit a pull request](https://github.com/skahal/buildron-ba
 ## License
 Licensed under the The MIT License (MIT).
 In others words, you can use this library for developement any kind of software: open source, commercial, proprietary and alien.
-
-
-## Change Log
- - 1.0.0 First version.
